@@ -1,9 +1,10 @@
 # README
 
 データベース設計
+*****
 
 usersテーブル
-******
+------------------------------------------------------------------------
 |:column               :|:Type                :|:option                :|
 |:----------------------|:---------------------|:-----------------------|
 |nickname               |string                |null: false             |
@@ -23,7 +24,7 @@ has_many :purcharsers
 
 *****
 itemsテーブル
-*****
+------------------------------------------------------------------------
 |:column               :|:Type                :|:option                :|
 |:----------------------|:---------------------|:-----------------------|
 |item_name              |string                |null: false, length: { maximum: 40} |
@@ -36,20 +37,20 @@ itemsテーブル
 |prefecture             |integer               |null: false, numericality: {other_than: 0} |
 |shipping_days          |integer               |null: false, numericality: {other_than: 0} |
 
-Association
-belongs_to :user
-has_many :commnets
-has_one :purchrser
-has_one :category
-has_one :item_condition
-has_one :delivery_charge
-has_one :shipping_days
-has_one :prefecture
-has_one_attached :image
+Association  
+belongs_to :user  
+has_many :commnets  
+has_one :purchrser  
+has_one :category  
+has_one :item_condition  
+has_one :delivery_charge  
+has_one :shipping_days  
+has_one :prefecture  
+has_one_attached :image  
 
 *****
 purcharsersテーブル
-*****
+------------------------------------------------------------------------
 |:column               :|:Type                :|:option                :|
 |:----------------------|:---------------------|:-----------------------|
 |postal_code            |string                |null: false, format: {with: /\A[0-9]{3}-[0-9]{4}\z/ |
@@ -61,21 +62,21 @@ purcharsersテーブル
 |user                   |references            |null: false, foreign_key:true|
 |item                   |references            |null: false, foreign_key:true|
 
-Association
-belongs_to :user
-belongs_to :item
+Association  
+belongs_to :user  
+belongs_to :item  
 
 *****
 commentsテーブル
-*****
+------------------------------------------------------------------------
 |:column               :|:Type                :|:option                :|
 |:----------------------|:---------------------|:-----------------------|
 |commnet                |string                |null: false             |
 |user                   |references            |null: false, foreign_key:true|
 |item                   |references            |null: false, foreign_key:true|
 
-Association
-belongs_to :user
-belongs_to :item
+Association  
+belongs_to :user  
+belongs_to :item  
 
 
