@@ -16,10 +16,10 @@ usersテーブル
 |first_kana_name        |string                |null: false, format: {with: /\A[ァ-ヶー]+\z/}|
 |birthday               |date                  |null: false             |
 
-Association
-has_many :items
-has_many :comments
-has_many :purcharsers
+Association  
+has_many :items  
+has_many :comments  
+has_many :purcharsers  
 
 
 *****
