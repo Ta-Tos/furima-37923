@@ -17,8 +17,7 @@ usersテーブル
 |birthday               |date                  |null: false             |
 
 Association  
-has_many :items  
-has_many :comments  
+has_many :items    
 has_many :purcharsers  
 
 
@@ -39,14 +38,12 @@ itemsテーブル
 
 Association  
 belongs_to :user  
-has_many :commnets  
 has_one :purchrser  
 has_one :category  
 has_one :item_condition  
 has_one :delivery_charge  
 has_one :shipping_days  
-has_one :prefecture  
-has_one_attached :image  
+has_one :prefecture   
 
 *****
 purcharsersテーブル
@@ -75,20 +72,8 @@ shipping_addressesテーブル
 |purcharser             |references            |null: false, foreign_key:true|
 
 Association  
-belongs_to :purcharser  
-has_one :prefecture  
+belongs_to :purcharser   
 
-*****
-commentsテーブル
-------------------------------------------------------------------------
-|:column               :|:Type                :|:option                :|
-|:----------------------|:---------------------|:-----------------------|
-|commnet                |string                |null: false             |
-|user                   |references            |null: false, foreign_key:true|
-|item                   |references            |null: false, foreign_key:true|
 
-Association  
-belongs_to :user  
-belongs_to :item  
 
 
