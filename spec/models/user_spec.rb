@@ -27,10 +27,11 @@ RSpec.describe User, type: :model do
       end
 
       it '既に登録されているemailは保存できない' do
-        user1 = FactoryBot.build(:user)
-        user1.save
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Email has already been taken")
+        @user.save
+        another_user = FactoryBot.build(:user)
+        another_user.email = @user.email
+        another_user.valid?
+        expect(another_user.errors.full_messages).to include("Email has already been taken")
       end
 
       it 'emailには@が含まれていること' do
@@ -52,8 +53,22 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
 
-      it 'passwordは半角英数字が混合でないと保存できないこと' do
+      it 'passwordは半角英字のみでは保存できないこと' do
         @user.password = "aaaaaa"
+        @user.password_confirmation = @user.password
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Include both letters and numbers")
+      end
+
+      it 'passwordは半角数字のみでは保存できないこと' do
+        @user.password = "111111"
+        @user.password_confirmation = @user.password
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Include both letters and numbers")
+      end
+      
+      it 'passwordは全角では保存できないこと' do
+        @user.password = "ああああああ"
         @user.password_confirmation = @user.password
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid. Include both letters and numbers")
