@@ -11,4 +11,6 @@ class User < ApplicationRecord
   end      
   valid_password_regex = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   validates :password, format: { with: valid_password_regex, message: "is invalid. Include both letters and numbers"}
+
+  has_many :items
 end
