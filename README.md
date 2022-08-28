@@ -39,11 +39,11 @@ itemsテーブル
 Association  
 belongs_to :user  
 has_one :purchrser  
-has_one :category  
-has_one :item_condition  
-has_one :delivery_charge  
-has_one :shipping_days  
-has_one :prefecture   
+belongs_to :category  
+belongs_to :item_condition  
+belongs_to :delivery_charge  
+belongs_to :shipping_days  
+belongs_to :prefecture   
 
 *****
 purcharsersテーブル
