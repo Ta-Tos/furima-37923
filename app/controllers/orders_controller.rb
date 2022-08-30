@@ -11,36 +11,25 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     @order = Order.new(order_params)
     if @order.valid?
+      pay_item
       @order.save
       redirect_to root_path
     else
       render action: :index
     end
-    # @purcharser = Purcharser.new(purcharser_params)
-    # binding.pry
-    # if @purcharser.save
-    #   @shipping_address = ShippingAddress.new(shipping_address_params)
-    #   if @shipping_address.save
-    #     redirect_to root_path
-    #   else
-    #     render :index
-    #   end
-    # else
-    #   render :index
-    # end
   end
 
   private
   def order_params
-    params.require(:order).permit(:postal_code, :prefecture_id, :municipality, :address_number, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
+    params.require(:order).permit(:postal_code, :prefecture_id, :municipality, :address_number, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
-    # def purcharser_params
-    #   params.permit(:item_id).merge(user_id: current_user.id)
-    # end
-
-    # def shipping_address_params
-    #   params.require(:shipping_address).permit(:postal_code, :prefecture_id, :municipality, :address_number, :building_name, :phone_number).merge(purcharser_id: @purcharser.id)
-    # end
-
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+      Payjp::Charge.create(
+        amount: @item.price,           # 商品の値段
+        card: order_params[:token],    # カードトークン
+        currency: 'jpy'                 # 通貨の種類（日本円）
+      )
+  end
 end
