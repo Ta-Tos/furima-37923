@@ -1,8 +1,8 @@
 const pay = () => {
-  Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY); //payjpの自身のアカウントのテスト公開鍵を設定
+  Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
   const submit = document.getElementById("button")
-  submit.addEventListener("click", (e) => { //(e)に送信ボタンをクリックしたという要素を代入
-    e.preventDefault();                     //Railsにおけるコントローラーでの送信処理をキャンセルする処理、サーバーサイドへリクエストが送られないようにしている
+  submit.addEventListener("click", (e) => {
+    e.preventDefault();                     
     
     const formResult = document.getElementById("charge-form");
     const formData = new FormData(formResult);
