@@ -10,6 +10,7 @@ class Order
     validates :municipality, :address_number, :item_id, :user_id
     validates :phone_number, length: { minimum: 10, message: 'is too short' }
   end
+  validates :phone_number, length: { maximum: 11, message: 'is too long' }
   validates :phone_number, format: { with: /\A[0-9]+\z/, message: 'is invalid. Input only number' }
 
   def save

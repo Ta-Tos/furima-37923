@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
-  before_action :move_to_topPage, only: [:index]
+  before_action :move_to_top_page, only: [:index]
   before_action :sold_out_move, only: [:index, :create]
 
   def index
@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def move_to_topPage
+  def move_to_top_page
     redirect_to root_path if current_user.id == @item.user_id
   end
 

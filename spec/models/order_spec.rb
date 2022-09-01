@@ -73,6 +73,12 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include('Phone number is too short')
       end
 
+      it 'phone_numberが11桁より多いと保存できないこと' do
+        @order.phone_number = 123_456_789_010
+        @order.valid?
+        expect(@order.errors.full_messages).to include('Phone number is too long')
+      end
+
       it 'phone_numberが全角の数字だと保存できないこと' do
         @order.phone_number = '１２３４５６７８９１０'
         @order.valid?
