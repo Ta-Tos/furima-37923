@@ -32,15 +32,15 @@ RSpec.describe Order, type: :model do
       end
 
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
-        @order.postal_code = 1111111
+        @order.postal_code = 1_111_111
         @order.valid?
-        expect(@order.errors.full_messages).to include("Postal code is invalid. Enter it as follows (e.g. 123-4567)")
+        expect(@order.errors.full_messages).to include('Postal code is invalid. Enter it as follows (e.g. 123-4567)')
       end
 
       it 'postal_codeが全角では保存できないこと' do
-        @order.postal_code = "１２３−４５６７"
+        @order.postal_code = '１２３−４５６７'
         @order.valid?
-        expect(@order.errors.full_messages).to include("Postal code is invalid. Enter it as follows (e.g. 123-4567)")
+        expect(@order.errors.full_messages).to include('Postal code is invalid. Enter it as follows (e.g. 123-4567)')
       end
 
       it 'prefectureを選択していないと保存できないこと' do
@@ -68,21 +68,21 @@ RSpec.describe Order, type: :model do
       end
 
       it 'phone_numberが10桁未満だと保存できないこと' do
-        @order.phone_number = 123456789
+        @order.phone_number = 123_456_789
         @order.valid?
-        expect(@order.errors.full_messages).to include("Phone number is too short")
+        expect(@order.errors.full_messages).to include('Phone number is too short')
       end
 
       it 'phone_numberが全角の数字だと保存できないこと' do
-        @order.phone_number = "１２３４５６７８９１０"
+        @order.phone_number = '１２３４５６７８９１０'
         @order.valid?
-        expect(@order.errors.full_messages).to include("Phone number is invalid. Input only number")
+        expect(@order.errors.full_messages).to include('Phone number is invalid. Input only number')
       end
 
       it 'phone_numberが数字以外だと保存できないこと' do
-        @order.phone_number = "あいうえおかきくけこさ"
+        @order.phone_number = 'あいうえおかきくけこさ'
         @order.valid?
-        expect(@order.errors.full_messages).to include("Phone number is invalid. Input only number")
+        expect(@order.errors.full_messages).to include('Phone number is invalid. Input only number')
       end
 
       it 'userが紐付いていないと保存できないこと' do
@@ -96,7 +96,6 @@ RSpec.describe Order, type: :model do
         @order.valid?
         expect(@order.errors.full_messages).to include("Item can't be blank")
       end
-
     end
   end
 end

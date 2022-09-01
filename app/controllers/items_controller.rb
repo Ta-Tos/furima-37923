@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  def show 
+  def show
   end
 
   def edit
@@ -53,9 +53,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless current_user.id == @item.user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless current_user.id == @item.user_id
   end
 
   def sold_data
@@ -63,8 +61,6 @@ class ItemsController < ApplicationController
   end
 
   def sold_out_move
-    if @purcharser.find_by(item_id: @item.id) 
-      redirect_to action: :index
-    end
+    redirect_to action: :index if @purcharser.find_by(item_id: @item.id)
   end
 end
