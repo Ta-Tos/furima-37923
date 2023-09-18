@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const alreadyPreview = document.querySelector('.preview');
     if (alreadyPreview) {
       alreadyPreview.remove();
-    }
+    };
     const file = e.target.files[0];
     const blob = window.URL.createObjectURL(file);
     console.log(blob);
@@ -22,5 +22,5 @@ document.addEventListener('DOMContentLoaded', function(){
 
     previewWrapper.appendChild(previewImage);
     previewList.appendChild(previewWrapper);
-  })
+  });
 });
